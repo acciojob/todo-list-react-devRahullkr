@@ -19,20 +19,14 @@ const App = () => {
   }
 
   const handleSave = () => {
-    const updatedList = tasklist.map((item,index) =>{
-     index === editIndex ? task : item;
-    })
+    const updatedList = tasklist.map((item,index) => index === editIndex ? task : item)
     setTasklist(updatedList)
-    editIndex(null)
+    SetEditIndex(null)
     setTask("")
   }
 
   const handleDelete = (index) => {
-    const filteredItem = tasklist.filter((item,i) => {
-      if(index !== i){
-        return item;
-      }
-    })
+    const filteredItem = tasklist.filter((item,i) => i !== index)
     setTasklist(filteredItem)
   }
   return (
@@ -50,7 +44,7 @@ const App = () => {
                {
                 editIndex === index ? 
                 <>
-                <input onChange={(e) => e.target.value} value={task} type="text"/>
+                <input onChange={(e) => setTask(e.target.value)} value={task} type="text"/>
                 <button onClick={handleSave}>Save</button>
                 </> :
                 <>
