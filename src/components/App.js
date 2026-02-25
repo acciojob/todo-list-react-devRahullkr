@@ -30,21 +30,21 @@ const App = () => {
     setTasklist(filteredItem)
   }
   return (
-    <div className="tasks_section">
+    <div>
         {/* Do not remove the main div */}
         <h1>To Do List</h1>
         <div className="add_tasks_section">
-          <input onChange={(e) => setTask(e.target.value)} value={task} type="text" />
+          <textarea onChange={(e) => setTask(e.target.value)} value={task} type="text" />
           <button className="add_tasks_section" onClick={handleTask}>Add</button>
         </div>
-        <ul>
+        <ul className="tasks_section">
           {
             tasklist.map((item,index) => {
               return <li className="task" key={index}>
                {
                 editIndex === index ? 
                 <>
-                <input onChange={(e) => setTask(e.target.value)} value={task} type="text"/>
+                <textarea onChange={(e) => setTask(e.target.value)} value={task} type="text"/>
                 <button className="save" onClick={handleSave}>Save</button>
                 </> :
                 <>
