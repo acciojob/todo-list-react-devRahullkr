@@ -33,24 +33,24 @@ const App = () => {
     <div>
         {/* Do not remove the main div */}
         <h1>To Do List</h1>
-        <div>
+        <div className="add_tasks_section">
           <input onChange={(e) => setTask(e.target.value)} value={task} type="text" />
           <button onClick={handleTask}>Add</button>
         </div>
         <ul>
           {
             tasklist.map((item,index) => {
-              return <li key={index}>
+              return <li className="task" key={index}>
                {
                 editIndex === index ? 
                 <>
                 <input onChange={(e) => setTask(e.target.value)} value={task} type="text"/>
-                <button onClick={handleSave}>Save</button>
+                <button className="save" onClick={handleSave}>Save</button>
                 </> :
                 <>
                 {item}
-                <button onClick={() => handleEdit(index)}>Edit</button>
-                <button onClick={() => handleDelete(index)}>Delete</button>
+                <button className="edit" onClick={() => handleEdit(index)}>Edit</button>
+                <button className="delete" onClick={() => handleDelete(index)}>Delete</button>
                 </>
                }
                 </li>
