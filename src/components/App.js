@@ -7,8 +7,21 @@ const App = () => {
   const [task,setTask] = useState("")
 
   const handleTask = () => {
-    setTask
+    setTask("")
     setTasklist(() => [...tasklist,task])
+  }
+
+  const handleEdit = (index) => {
+    
+  }
+
+  const handleDelete = (index) => {
+    const filteredItem = tasklist.filter((item,i) => {
+      if(index !== i){
+        return item;
+      }
+    })
+    setTasklist(filteredItem)
   }
   return (
     <div>
@@ -23,8 +36,8 @@ const App = () => {
             tasklist.map((item,index) => {
               return <li>
                 {item} 
-                <button>Edit</button>
-                <button>Delete</button>
+                <button onClick={() => handleEdit(index)}>Edit</button>
+                <button onClick={() => handleDelete(index)}>Delete</button>
                 </li>
             })
           }
