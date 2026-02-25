@@ -30,12 +30,12 @@ const App = () => {
     setTasklist(filteredItem)
   }
   return (
-    <div>
+    <div className="tasks_section">
         {/* Do not remove the main div */}
         <h1>To Do List</h1>
         <div className="add_tasks_section">
           <input onChange={(e) => setTask(e.target.value)} value={task} type="text" />
-          <button onClick={handleTask}>Add</button>
+          <button className="add_tasks_section" onClick={handleTask}>Add</button>
         </div>
         <ul>
           {
