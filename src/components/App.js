@@ -5,20 +5,26 @@ import './../styles/App.css';
 const App = () => {
   const [tasklist,setTasklist] = useState([])
   const [task,setTask] = useState("")
-  const [isEditing,setIsEditing] = useState(false)
+  const [editIndex,SetEditIndex] = useState(null)
 
   const handleTask = () => {
-    setTask("")
+    if(task.trim() === "")return;
     setTasklist(() => [...tasklist,task])
+    setTask("")
   }
 
   const handleEdit = (index) => {
-    setIsEditing(true)
-    setTasklist(() => [...tasklist,task])
+    SetEditIndex(index)
+    setTask(tasklist[index])
   }
 
   const handleSave = () => {
-    setIsEditing(false)
+    const updatedList = tasklist.map((item,index) =>{
+     index === editIndex ? task : item;
+    })
+    setTasklist(updatedList)
+    editIndex(null)
+    setTask("")
   }
 
   const handleDelete = (index) => {
@@ -40,10 +46,19 @@ const App = () => {
         <ul>
           {
             tasklist.map((item,index) => {
-              return <li>
-                {item} 
-                {isEditing ? <div> <input onChange={(e) => e.target.value} type="text" value={task} /> <button onClick={handleSave}>Save</button></div>  :<button onClick={() => handleEdit(index)}>Edit</button>}
-                {isEditing ? null: <button onClick={() => handleDelete(index)}>Delete</button>}
+              return <li key={index}>
+               {
+                editIndex === index ? 
+                <>
+                <input onChange={(e) => e.target.value} value={task} type="text"/>
+                <button onClick={handleSave}>Save</button>
+                </> :
+                <>
+                {item}
+                <button onClick={() => handleEdit(index)}>Edit</button>
+                <button onClick={() => handleDelete(index)}>Delete</button>
+                </>
+               }
                 </li>
             })
           }
