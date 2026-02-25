@@ -5,6 +5,7 @@ import './../styles/App.css';
 const App = () => {
   const [tasklist,setTasklist] = useState([])
   const [task,setTask] = useState("")
+  const [isEditing,setIsEditing] = useState(false)
 
   const handleTask = () => {
     setTask("")
@@ -12,7 +13,12 @@ const App = () => {
   }
 
   const handleEdit = (index) => {
-    
+    setIsEditing(true)
+    setTasklist(() => [...tasklist,task])
+  }
+
+  const handleSave = () => {
+    setIsEditing(false)
   }
 
   const handleDelete = (index) => {
@@ -36,8 +42,8 @@ const App = () => {
             tasklist.map((item,index) => {
               return <li>
                 {item} 
-                <button onClick={() => handleEdit(index)}>Edit</button>
-                <button onClick={() => handleDelete(index)}>Delete</button>
+                {isEditing ? <div> <input onChange={(e) => e.target.value} type="text" value={task} /> <button onClick={handleSave}>Save</button></div>  :<button onClick={() => handleEdit(index)}>Edit</button>}
+                {isEditing ? null: <button onClick={() => handleDelete(index)}>Delete</button>}
                 </li>
             })
           }
